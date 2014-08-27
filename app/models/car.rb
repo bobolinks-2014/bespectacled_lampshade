@@ -6,4 +6,5 @@ class Car < ActiveRecord::Base
 		gallons_per_trip = args[:miles] * gallons_per_mile
 		cost_per_trip = args[:fuel_cost] * gallons_per_trip
 	end
+
 end
