@@ -27,9 +27,17 @@ describe 'car' do
 
 end
 
-describe 'calculate fuel cost method' do
+describe "fuel_costs" do
   let(:car){Car.new}
-  it 'should calulate fuel costs per day' do
-    expect(Car).to respond_to(:fuel_costs).with(3).arguments
+
+  it {should respond_to(:hash)}
+
+  it 'should return a float' do
+    args = {gas_price: 2, distance:5.13, mpg:3}
+    expect(car.fuel_costs(args)).to be_an_instance_of(Float)
+  end
+  it 'should return an answer with two decimal places' do
+    args = {gas_price: 2, distance:5.13, mpg:3}
+    expect(car.fuel_costs(args)).to eq(car.fuel_costs(args).round(2))
   end
 end
