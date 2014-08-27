@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  make: MyString
+  model: MyString
+  year: MyString
+  city08U: MyString
+  highway08U: MyString
+
+two:
+  make: MyString
+  model: MyString
+  year: MyString
+  city08U: MyString
+  highway08U: MyString
