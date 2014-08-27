@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20140827203610) do
     t.string   "make"
     t.string   "model"
     t.integer  "year"
-    t.float    "city_mpg"
-    t.float    "highway_mpg"
+    t.integer  "city_mpg"
+    t.integer  "highway_mpg"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

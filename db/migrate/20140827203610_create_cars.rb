@@ -4,8 +4,8 @@ class CreateCars < ActiveRecord::Migration
       t.string :make
       t.string :model
       t.integer :year
-      t.float :city_mpg
-      t.float :highway_mpg
+      t.integer :city_mpg
+      t.integer :highway_mpg
 
       t.timestamps
     end
