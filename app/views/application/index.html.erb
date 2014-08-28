@@ -1,5 +1,12 @@
-<%form_tag(root_path, method: 'get')%>
+<div class = "row">
+<p> Enter Your Location Information </p>
+<%=form_tag(root_path, method: 'get') do%>
+<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point"%>
+<%= text_field_tag 'destination', nil, placeholder: "Destination"%>
 
-
-<input type="submit" value="Starting Point">
-<input type="submit" value="Destination">
+<p> Enter Your Car Information </p>
+<%= select_tag "make", options_for_select(@make) %>
+<%= select_tag "model", options_for_select(['camry']) %>
+<%= select_tag "year", options_for_select([1992, 1993]) %>
+<% end %>
+</div>

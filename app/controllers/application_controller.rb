@@ -4,5 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
+    @make = Car.order("make").select("make").distinct(true).pluck("make")
+    p @make
   end
 end
