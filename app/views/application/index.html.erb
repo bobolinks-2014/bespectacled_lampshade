@@ -1,0 +1,12 @@
+<div class = "row">
+<p> Enter Your Location Information </p>
+<%=form_tag(root_path, method: 'get') do%>
+<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point"%>
+<%= text_field_tag 'destination', nil, placeholder: "Destination"%>
+
+<p> Enter Your Car Information </p>
+<%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
+<%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
+<%= select_tag "year", options_for_select([]),:prompt => "Year" %>
+<% end %>
+</div>
