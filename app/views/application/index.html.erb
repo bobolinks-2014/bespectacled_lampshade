@@ -5,8 +5,8 @@
 <%= text_field_tag 'destination', nil, placeholder: "Destination"%>
 
 <p> Enter Your Car Information </p>
-<%= select_tag "make", options_for_select(@make) %>
-<%= select_tag "model", options_for_select(['camry']) %>
-<%= select_tag "year", options_for_select([1992, 1993]) %>
+<%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
+<%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
+<%= select_tag "year", options_for_select([]),:prompt => "Year" %>
 <% end %>
 </div>
