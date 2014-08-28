@@ -19,21 +19,21 @@ describe 'car' do
   end
 end
 
-describe "fuel_costs" do
-  let(:car){Car.new}
-  let (:args){{gas_price: 2, distance:5.13, mpg:3}}
+describe "fuel_cost" do
+  let(:car){Car.create(city_mpg: 3, highway_mpg: 3)}
+  let (:args){{gas_price: 2, distance: 6}}
 
   it {should respond_to(:hash)}
 
   it 'should return a float' do
-    expect(car.fuel_costs(args)).to be_an_instance_of(Float)
+    expect(car.fuel_cost(args)).to be_an_instance_of(Float)
   end
   it 'should return an answer with two decimal places' do
-    expect(car.fuel_costs(args)).to eq(car.fuel_costs(args).round(2))
+    expect(car.fuel_cost(args)).to eq(car.fuel_cost(args).round(2))
   end
 
   it "should calculate fuel_costs" do
-    expect(car.fuel_costs(args)).to eq(3.42)
+    expect(car.fuel_cost(args)).to eq(4)
   end
 end
 
