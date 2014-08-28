@@ -6,7 +6,4 @@ class Car < ActiveRecord::Base
     cost_per_trip = ( args[:gas_price].to_f * gallons_per_trip ).round(2)
   end
 
-  def self.kilometers_to_miles kilometers
-    miles = ( kilometers * 0.621371 ).round(2)
-  end
 end
