@@ -46,7 +46,7 @@ $('#user').submit(function(e){
   var coords;
 
   getCoords(userInput.starting_point).done(function(data){
-    if (data.results = "ZERO_RESULTS") {
+    if (data.results === "ZERO_RESULTS") {
       alert("Please enter a valid address.");
       $(".starting_point").prop("disabled", false);
 +     $(".destination").prop("disabled", false);
