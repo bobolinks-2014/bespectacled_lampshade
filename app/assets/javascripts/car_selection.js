@@ -46,18 +46,19 @@ $('#user').submit(function(e){
   };
 
   coords = getCoords(userInput.starting_point);
+
   getGasPrices({latitude: coords.latitude, longitude: coords.longitude}, '2', 'reg', 'Price').done(function(json){
     data = JSON.parse(json);
-    var avg = averageGasPrice(data.stations);
-    debugger;
+    userInput['gas_price'] = averageGasPrice(data.stations);
+    console.log("got gas price");
+    var DBrequest = $.get('/submit', userInput);
+      DBrequest.done(function(data){
+        console.log("something");
+        card = new Card(data);
+        cardView = new CardView(card)
+        cardView.displayCard();
+      });
   }.bind(this));
-
-  var DBrequest = $.get('/submit', userInput);
-  DBrequest.done(function(data){
-    card = new Card(data);
-    cardView = new CardView(card)
-    cardView.displayCard();
-  });
 });
 
 

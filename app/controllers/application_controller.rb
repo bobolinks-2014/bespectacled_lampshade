@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
 
   def submit
     p "*"*100
+    p params[:gas_price]
     distance = Google.calculate_distance(params[:starting_point], params[:destination])
     car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
     fuel_cost = car.fuel_cost({distance: distance, gas_price: params[:gas_price]})
