@@ -4,7 +4,8 @@
 // this is an ajax call
 //then we render!
 
-$('#make').change(function() {
+$('#make').change(function(e) {
+
   var selected = $(this).find(":selected").text();
   var request = $.get('/get_model', {chosen_make: selected});
   request.done(function(data){
@@ -16,7 +17,7 @@ $('#make').change(function() {
   });
 });
 
-$('#model').change(function() {
+$('#model').change(function(e) {
   var selected = $(this).find(":selected").text();
   var request = $.get('/get_model_year', {chosen_model: selected});
   request.done(function(data){
@@ -25,4 +26,8 @@ $('#model').change(function() {
       $('#year').append('<option value>'+data[item]+'</option>');
     });
   });
+});
+
+$('#user').submit(function(){
+
 });
