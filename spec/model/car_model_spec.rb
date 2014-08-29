@@ -32,6 +32,6 @@ describe "fuel_cost" do
   end
 
   it "should calculate fuel_costs" do
-    expect(car.fuel_cost(args)).to eq(4)
+    expect(car.fuel_cost(args)).to eq(8)
   end
 end
