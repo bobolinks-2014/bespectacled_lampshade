@@ -6,4 +6,9 @@ class Car < ActiveRecord::Base
     cost_per_trip = ( args[:gas_price].to_f * gallons_per_trip ).round(2)
   end
 
+
+
+  def name
+    "#{self.year} #{self.make} #{self.model}"
+  end
 end
