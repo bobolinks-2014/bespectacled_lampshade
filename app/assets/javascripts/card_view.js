@@ -12,7 +12,6 @@ CardView.prototype.displayCard = function(){
   $('.cards').prepend(this.render());
 }
 
-// this isn't right. yet
 CardView.prototype.deleteCard = function(event){
   event.preventDefault();
   $(this).parent().parent().parent().empty();

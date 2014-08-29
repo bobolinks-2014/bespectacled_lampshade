@@ -21,7 +21,9 @@ $('#make').change(function(e) {
   var request = $.get('/get_model', {chosen_make: selected});
   request.done(function(data){
     $('#model').empty();
+    $('#model').append('<option value> Model </option>')
     $('#year').empty();
+    $('#year').append('<option value> Year </option>')
     $.each(data, function(item){
       $('#model').append('<option value>'+data[item]+'</option>');
     });
@@ -33,6 +35,7 @@ $('#model').change(function(e) {
   var request = $.get('/get_model_year', {chosen_model: selected});
   request.done(function(data){
     $('#year').empty();
+    $('#year').append('<option value> Year </option>')
     $.each(data, function(item){
       $('#year').append('<option value>'+data[item]+'</option>');
     });

@@ -1,6 +1,5 @@
-## TODO: when the form auto populates, it doesn't auto mark as selected and then it doesnt let you select the model if there is only one model.
-  #If A user fails to provide a response, it errors out. We need error handling or the ability to add all cars from 2003
-# TODO: we also cant access the Google class from this controller. which is just bizzare
+  # TODO: If A user fails to provide a response, it errors out. We need error handling or the ability to add all cars from 2003
+  # TODO: Use gas API
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -36,8 +35,7 @@ class ApplicationController < ActionController::Base
     # find the monthly cost
     # find the yearly cost
 
-    # p distance = Google.calculate_distance(params[:starting_point], params[:destination])
-    distance = 25;
+    p distance = Google.calculate_distance(params[:starting_point], params[:destination])
     p car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
     p fuel_cost = car.fuel_cost({distance: distance, gas_price: 3.50})
     p name = car.name
