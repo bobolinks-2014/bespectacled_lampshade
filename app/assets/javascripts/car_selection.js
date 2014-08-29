@@ -49,9 +49,7 @@ $('#user').submit(function(e){
     coords = data.results[0].geometry.location;
     getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
-      console.log(data);
       userInput['gas_price'] = averageGasPrice(data.stations);
-
       var DBrequest = $.get('/submit', userInput);
       DBrequest.done(function(data){
         card = new Card(data);
