@@ -3,17 +3,6 @@
 // we want model to  be populated with the models associated with that newly selected make
 // this is an ajax call
 //then we render!
-function Input(){
-  this.destination;
-  this.starting_point;
-  this.make;
-  this.model;
-  this.year;
-}
-
-
-
-
 
 $('#make').change(function(e) {
 
@@ -48,19 +37,50 @@ $('#model').change(function(e) {
 $('#user').submit(function(e){
   e.preventDefault();
 
-  var input = {
+  var userInput = {
     starting_point: $('#starting_point').val(),
     destination: $('#destination').val(),
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
   };
-  var request = $.get('/submit', input);
-  request.done(function(data){
-    console.log(data);
+
+  coords = getCoords(userInput.starting_point);
+  getGasPrices({latitude: coords.latitude, longitude: coords.longitude}, '2', 'reg', 'Price').done(function(json){
+    data = JSON.parse(json);
+    var avg = averageGasPrice(data.stations);
+    debugger;
+  }.bind(this));
+
+  var DBrequest = $.get('/submit', userInput);
+  DBrequest.done(function(data){
     card = new Card(data);
     cardView = new CardView(card)
     cardView.displayCard();
-    // $('.cards').append('<div class="large-3 columns "><ul class="pricing-table"><li class="title">'+data.name+'</li><li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li><li class="description">'+data.city_mpg +'MPG City /'+data.hwy_mpg+'MPG Hwy</li><li class="bullet-item">$'+data.monthly_cost+'mo</li><li class="bullet-item">$'+data.yearly_cost+'yr</li><li class="cta-button"><a href="#" class="button round tiny">X</a></li></ul></div>');
   });
 });
+
+
+function getCoords(starting_point){
+  // should actually make google api call
+  console.log("getting coordes");
+  return {latitude: '42.1292', longitude: '-87.8408'};
+}
+function getGasPrices(coords, distance, fuel_type, sort_by){
+    var request = $.get('http://devapi.mygasfeed.com/stations/radius/'+coords.latitude+'/'+coords.longitude+'/'+distance+'/'+fuel_type+'/'+sort_by+'/rfej9napna.json');
+    return request;
+}
+
+function averageGasPrice(stations){
+  var total = 0;
+  var len = stations.length;
+  $.each(stations, function(station){
+    total += parseFloat(this.reg_price);
+  });
+  return total/len;
+}
+
+// var APIrequest = $.get('http://devapi.mygasfeed.com/stations/radius/42.1292/-87.8408/2/reg/Price/rfej9napna.json');
+// APIrequest.done(function(data){
+//   console.log(data);
+// });
