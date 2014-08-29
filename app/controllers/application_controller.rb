@@ -30,15 +30,11 @@ class ApplicationController < ActionController::Base
 
   def submit
     p "*"*100
-    # find the distance
-    # find the mpgs
-    # find the monthly cost
-    # find the yearly cost
-
-    p distance = Google.calculate_distance(params[:starting_point], params[:destination])
-    p car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
-    p fuel_cost = car.fuel_cost({distance: distance, gas_price: 3.50})
-    p name = car.name
+    p params[:gas_price]
+    distance = Google.calculate_distance(params[:starting_point], params[:destination])
+    car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
+    fuel_cost = car.fuel_cost({distance: distance, gas_price: params[:gas_price]})
+    name = car.name
     return_value = {name: name ,distance: distance, monthly_cost: (fuel_cost*WORK_MONTH).round(2), yearly_cost: (fuel_cost*WORK_YEAR).round(2), city_mpg: car.city_mpg, hwy_mpg: car.highway_mpg }
     if request.xhr?
       render :json => return_value
