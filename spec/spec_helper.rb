@@ -15,6 +15,8 @@ RSpec.configure do |config|
 
   config.mock_with :rspec
 
+  config.include Rails.application.routes.url_helpers
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
