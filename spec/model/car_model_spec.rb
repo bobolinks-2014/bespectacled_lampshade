@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'car' do
+describe "Car" do
   let(:car){Car.new}
   it 'should return a car object, class Car' do
     expect(car).to be_a(Car)
@@ -20,10 +20,9 @@ describe 'car' do
 end
 
 describe "fuel_cost" do
-  let(:car){Car.create(city_mpg: 3, highway_mpg: 3)}
+  let(:car){Car.new(city_mpg: 3, highway_mpg: 3)}
   let (:args){{gas_price: 2, distance: 6}}
-
-  it {should respond_to(:hash)}
+  # it {should respond_to(:hash)}
 
   it 'should return a float' do
     expect(car.fuel_cost(args)).to be_an_instance_of(Float)
@@ -34,15 +33,5 @@ describe "fuel_cost" do
 
   it "should calculate fuel_costs" do
     expect(car.fuel_cost(args)).to eq(4)
-  end
-end
-
-describe "kilometers_to_miles" do
-  let(:conversion){Car.kilometers_to_miles(10)}
-  it 'should return a float' do
-    expect(conversion).to be_an_instance_of(Float)
-  end
-  it 'should convert kilometers to miles' do
-    expect(conversion).to eq(6.21)
   end
 end
