@@ -20,6 +20,12 @@ gem 'jquery-rails'
 # Use foundation as the view framework
 gem 'foundation-rails'
 
+# For integration testing
+gem 'capybara-webkit'
+gem 'launchy'
+gem 'selenium-webdriver'
+gem 'selenium-client'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
