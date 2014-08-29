@@ -1,3 +1,6 @@
+## TODO: when the form auto populates, it doesn't auto mark as selected and then it doesnt let you select the model if there is only one model.
+  #If A user fails to provide a response, it errors out. We need error handling or the ability to add all cars from 2003
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
