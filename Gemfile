@@ -21,10 +21,11 @@ gem 'jquery-rails'
 gem 'foundation-rails'
 
 # For integration testing
-gem 'capybara-webkit'
+
 gem 'launchy'
 gem 'selenium-webdriver'
-gem 'selenium-client'
+gem 'capybara-webkit'
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

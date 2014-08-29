@@ -38,3 +38,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
 end
+
+Capybara.javascript_driver = :webkit
+
+

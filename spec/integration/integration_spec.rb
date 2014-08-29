@@ -1,7 +1,11 @@
-require '../spec_helper'
-require 'selenium-client'
+require 'spec_helper'
+# require 'selenium-client'
 
 feature 'initial view' do
+
+  before do 
+    Car.create!(make: "Fisker", model: "Karma")
+  end
 
   context "on landing page" do
     it "should see a text field for home address input" do

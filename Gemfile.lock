@@ -126,7 +126,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    selenium-client (1.2.18)
     selenium-webdriver (2.35.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -177,7 +176,6 @@ DEPENDENCIES
   rspec-rails (~> 2.14.1)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  selenium-client
   selenium-webdriver
   spring
   turbolinks
