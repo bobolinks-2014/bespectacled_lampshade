@@ -36,7 +36,6 @@ $('#model').change(function(e) {
 
 $('#user').submit(function(e){
   e.preventDefault();
-
   var userInput = {
     starting_point: $('#starting_point').val(),
     destination: $('#destination').val(),
@@ -44,32 +43,34 @@ $('#user').submit(function(e){
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
   };
+  var coords;
 
-  coords = getCoords(userInput.starting_point);
+  getCoords(userInput.starting_point).done(function(data){
+    coords = data.results[0].geometry.location;
+    getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
+      data = JSON.parse(json);
+      console.log(data);
+      userInput['gas_price'] = averageGasPrice(data.stations);
 
-  getGasPrices({latitude: coords.latitude, longitude: coords.longitude}, '2', 'reg', 'Price').done(function(json){
-    data = JSON.parse(json);
-    userInput['gas_price'] = averageGasPrice(data.stations);
-    console.log("got gas price");
-    var DBrequest = $.get('/submit', userInput);
+      var DBrequest = $.get('/submit', userInput);
       DBrequest.done(function(data){
-        console.log("something");
         card = new Card(data);
         cardView = new CardView(card)
         cardView.displayCard();
       });
-  }.bind(this));
+    });
+  });
 });
 
 
 function getCoords(starting_point){
   // should actually make google api call
-  console.log("getting coords");
   parsed_starting_point = parseAddress(starting_point);
   console.log(parsed_starting_point);
   var request = $.get("https://maps.googleapis.com/maps/api/geocode/json?address="+parsed_starting_point+"&key=AIzaSyAVkmq_gu_UwQiR7znb8Bf0_mktYaEDt0E"
 )
-  return {latitude: '42.1292', longitude: '-87.8408'};
+  return request;
+  // return {latitude: '42.1292', longitude: '-87.8408'};
 }
 
 function parseAddress(address){
