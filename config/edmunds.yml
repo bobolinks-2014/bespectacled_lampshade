@@ -8,3 +8,6 @@ edmunds_secret: 6YHqf4jH3kZSdyehn2Ygtavg
 # Key Rate Limits
 # 2	 Calls per second
 # 5,000	 Calls per day
+
+# https://api.edmunds.com/api/vehicle/v2/honda/accord?state=new&year=2014&view=basic&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn
+# https://api.edmunds.com/api/vehicle/v2/subaru/impreza?year=2014&view=basic&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn
