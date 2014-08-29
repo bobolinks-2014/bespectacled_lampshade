@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'get_model_year' => 'application#get_model_year'
 
+  get 'submit' => 'application#submit'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
