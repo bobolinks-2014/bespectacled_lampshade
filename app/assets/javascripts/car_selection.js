@@ -36,21 +36,22 @@ $('#model').change(function(e) {
 
 $('#user').submit(function(e){
   e.preventDefault();
-  var userInput = {
+  var options = {
     starting_point: $('#starting_point').val(),
     destination: $('#destination').val(),
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
-  };
+  }
+  var userInput = new UserInput(options);
   var coords;
-
-  getCoords(userInput.starting_point).done(function(data){
+  userInput.getCoords(userInput.starting_point).done(function(data){
     coords = data.results[0].geometry.location;
-    getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
+    userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
-      userInput['gas_price'] = averageGasPrice(data.stations);
-      var DBrequest = $.get('/submit', userInput);
+      userInput.gas_price = userInput.averageGasPrice(data.stations);
+      options["gas_price"] = userInput.gas_price;
+      var DBrequest = $.get('/submit', options);
       DBrequest.done(function(data){
         card = new Card(data);
         cardView = new CardView(card)
@@ -61,33 +62,31 @@ $('#user').submit(function(e){
 });
 
 
-function getCoords(starting_point){
-  // should actually make google api call
-  parsed_starting_point = parseAddress(starting_point);
-  console.log(parsed_starting_point);
-  var request = $.get("https://maps.googleapis.com/maps/api/geocode/json?address="+parsed_starting_point+"&key=AIzaSyAVkmq_gu_UwQiR7znb8Bf0_mktYaEDt0E"
-)
-  return request;
-  // return {latitude: '42.1292', longitude: '-87.8408'};
-}
+// function getCoords(starting_point){
+//   parsed_starting_point = parseAddress(starting_point);
+//   console.log(parsed_starting_point);
+//   var request = $.get("https://maps.googleapis.com/maps/api/geocode/json?address="+parsed_starting_point+"&key=AIzaSyAVkmq_gu_UwQiR7znb8Bf0_mktYaEDt0E"
+// )
+//   return request;
+// }
 
-function parseAddress(address){
-  return address.replace(" ", "+")
-}
+// function parseAddress(address){
+//   return address.replace(" ", "+")
+// }
 
-function getGasPrices(coords, distance, fuel_type, sort_by){
-    var request = $.get('http://devapi.mygasfeed.com/stations/radius/'+coords.latitude+'/'+coords.longitude+'/'+distance+'/'+fuel_type+'/'+sort_by+'/rfej9napna.json');
-    return request;
-}
+// function getGasPrices(coords, distance, fuel_type, sort_by){
+//     var request = $.get('http://devapi.mygasfeed.com/stations/radius/'+coords.latitude+'/'+coords.longitude+'/'+distance+'/'+fuel_type+'/'+sort_by+'/rfej9napna.json');
+//     return request;
+// }
 
-function averageGasPrice(stations){
-  var total = 0;
-  var len = stations.length;
-  $.each(stations, function(station){
-    total += parseFloat(this.reg_price);
-  });
-  return total/len;
-}
+// function averageGasPrice(stations){
+//   var total = 0;
+//   var len = stations.length;
+//   $.each(stations, function(station){
+//     total += parseFloat(this.reg_price);
+//   });
+//   return total/len;
+// }
 
 // var APIrequest = $.get('http://devapi.mygasfeed.com/stations/radius/42.1292/-87.8408/2/reg/Price/rfej9napna.json');
 // APIrequest.done(function(data){
