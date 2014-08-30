@@ -1,6 +1,14 @@
+// TODO: make this a describe for the user input model
 describe ("parseAddress", function(){
+  var userInput = new UserInput({
+    starting_point: "northbrook, il",
+    destination: "chicago, il",
+    make: "ford",
+    model: "focus",
+    year: "2004"
+  })
   it ("should return a parsed address", function(){
-    expect(parseAddress('chicago, IL')).toEqual("chicago,+IL");
+    expect(userInput.parseAddress('chicago, IL')).toEqual("chicago,+IL");
   });
 });
 
@@ -8,11 +16,10 @@ describe ("averageGasPrice",function(){
   xit ("should take an array input", function(){
 
   });
-  it ("should return the average of the input array", function(){
+  xit ("should return the average of the input array", function(){
     expect(averageGasPrice([1,2,3,4])).toEqual(5);
   });
 });
-
 
 
 describe ("getGasPrices", function(){
@@ -22,20 +29,20 @@ describe ("getGasPrices", function(){
   var fuel_type = "reg";
   var sort_by = "Price";
 
+  var fakeUserInput = new UserInput({
+      starting_point: "northbrook, il",
+      destination: "chicago, il",
+      make: "ford",
+      model: "focus",
+      year: "2004"
+    });
   beforeEach(function(){
-    foo = {
-      getGasPrices: function(coords, distance, fuel_type, sort_by){
-
-      }
-    };
+    spyOn(fakeUserInput, 'getGasPrices');
+    fakeUserInput.getGasPrices(coords, distance, fuel_type, sort_by);
   });
 
-  spyOn(foo, getGasPrices)
-  xit("should accept properly formatted argument in api request ", function(){
-    expect(getGasPrices(coords, distance, fuel_type, sort_by)).toEqual(200)
-  });
-  xit("should include stations in the return data", function(){
-    expect(JSON.parse(getGasPrices(coords, distance, fuel_type, sort_by).returnText).stations).toBeDefined();
+  it("should accept a request with the correct format", function(){
+    expect(fakeUserInput.getGasPrices).toHaveBeenCalledWith(coords, distance, fuel_type, sort_by);
   });
 });
 

@@ -1,16 +1,14 @@
-
-<div class = "row">
 <h1> Sumzing coool </h1>
 <p> Enter Your Location Information </p>
 <%=form_tag(root_path, method: 'get', id: "user") do%>
-<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point"%>
-<%= text_field_tag 'destination', nil, placeholder: "Destination"%>
+<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point", class: "starting_point"%>
+<%= text_field_tag 'destination', nil, placeholder: "Destination", class: "destination"%>
 
 <p> Enter Your Car Information </p>
   <%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
   <%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
   <%= select_tag "year", options_for_select([]),:prompt => "Year" %>
-<%=submit_tag "submit", class: "button" %>
+<%=submit_tag "submit", class: "button car-info", style: "visibility:hidden" %>
 <% end %>
 </div>
 <hr>
