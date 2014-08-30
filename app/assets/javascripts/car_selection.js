@@ -13,6 +13,7 @@ $('#make').change(function(e) {
     $('#model').append('<option value> Model </option>')
     $('#year').empty();
     $('#year').append('<option value> Year </option>')
+    $(".button.car-info").css("visibility", "hidden");
     $.each(data, function(item){
       $('#model').append('<option value>'+data[item]+'</option>');
     });
@@ -20,8 +21,10 @@ $('#make').change(function(e) {
 });
 
 $('#model').change(function(e) {
+  
   var selected = $(this).find(":selected").text();
   var request = $.get('/get_model_year', {chosen_model: selected});
+  $(".button.car-info").css("visibility", "hidden");
   request.done(function(data){
     $('#year').empty();
     $('#year').append('<option value> Year </option>')
@@ -30,7 +33,9 @@ $('#model').change(function(e) {
     });
   });
 });
-
+$('#year').change(function(e) {
+  $(".button.car-info").css("visibility", "visible");
+});
 
 // when the user submits the form, make a post request.
 
@@ -53,6 +58,8 @@ $('#user').submit(function(e){
       $(".destination").prop("disabled", false);
     }
     else {
+      $(".starting_point").prop("disabled", true);
+      $(".destination").prop("disabled", true);
     coords = data.results[0].geometry.location;
     userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
@@ -60,6 +67,7 @@ $('#user').submit(function(e){
       options["gas_price"] = userInput.gas_price;
       var DBrequest = $.get('/submit', options);
       DBrequest.done(function(data){
+        $(".button.car-info").css("visibility", "hidden");
         card = new Card(data);
         cardView = new CardView(card)
         cardView.displayCard();
