@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
-
+    <link href='http://fonts.googleapis.com/css?family=Anton|Raleway' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -14,11 +14,10 @@
     <ul class="title-area">
       <li class="name"><img src="assets/images/gasulator-04.svg" /><h1>Gasulator</h1></li>
     </ul>
+
   </nav>
   <body>
-    <div class="row">
-      <%= yield %>
-      <%= javascript_include_tag "application" %>
-    </div>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
