@@ -22,7 +22,16 @@ describe ("getGasPrices", function(){
   var fuel_type = "reg";
   var sort_by = "Price";
 
-  xit("should return successful api request", function(){
+  beforeEach(function(){
+    foo = {
+      getGasPrices: function(coords, distance, fuel_type, sort_by){
+
+      }
+    };
+  });
+
+  spyOn(foo, getGasPrices)
+  xit("should accept properly formatted argument in api request ", function(){
     expect(getGasPrices(coords, distance, fuel_type, sort_by)).toEqual(200)
   });
   xit("should include stations in the return data", function(){
