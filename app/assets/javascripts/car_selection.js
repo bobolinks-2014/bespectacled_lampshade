@@ -42,17 +42,16 @@ $('#year').change(function(e) {
 $('#user').submit(function(e){
   e.preventDefault();
 
-  var options = {
+  var userInput = {
     starting_point: $('#starting_point').val(),
     destination: $('#destination').val(),
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
   }
-  var userInput = new UserInput(options);
   var coords;
-  userInput.getCoords(userInput.starting_point).done(function(data){
-    console.log(data);
+
+  getCoords(userInput.starting_point).done(function(data){
     if (data.status === "ZERO_RESULTS") {
       alert("Please enter a valid address.");
       $(".starting_point").prop("disabled", false);
@@ -61,19 +60,18 @@ $('#user').submit(function(e){
     else {
       $(".starting_point").prop("disabled", true);
       $(".destination").prop("disabled", true);
-      coords = data.results[0].geometry.location;
-      userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
-        data = JSON.parse(json);
-        userInput.gas_price = userInput.averageGasPrice(data.stations);
-        options["gas_price"] = userInput.gas_price;
-        var DBrequest = $.get('/submit', options);
-        DBrequest.done(function(data){
-          $(".button.car-info").css("visibility", "hidden");
-          card = new Card(data);
-          cardView = new CardView(card)
-          cardView.displayCard();
-        });
+    coords = data.results[0].geometry.location;
+    getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
+      data = JSON.parse(json);
+      userInput['gas_price'] = averageGasPrice(data.stations);
+      var DBrequest = $.get('/submit', userInput);
+      DBrequest.done(function(data){
+        $(".button.car-info").css("visibility", "hidden");
+        card = new Card(data);
+        cardView = new CardView(card)
+        cardView.displayCard();
       });
+    });
     }
   })
 });
