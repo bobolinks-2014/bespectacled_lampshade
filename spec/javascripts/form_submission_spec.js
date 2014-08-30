@@ -1,6 +1,14 @@
+// TODO: make this a describe for the user input model
 describe ("parseAddress", function(){
+  var userInput = new UserInput({
+    starting_point: "northbrook, il",
+    destination: "chicago, il",
+    make: "ford",
+    model: "focus",
+    year: "2004"
+  })
   it ("should return a parsed address", function(){
-    expect(parseAddress('chicago, IL')).toEqual("chicago,+IL");
+    expect(userInput.parseAddress('chicago, IL')).toEqual("chicago,+IL");
   });
 });
 
@@ -21,16 +29,20 @@ describe ("getGasPrices", function(){
   var distance = "2";
   var fuel_type = "reg";
   var sort_by = "Price";
-  // var obj = window;
-  // spyOn(window, 'getGasPrices');
-  // console.log("here");
-  obj.getGasPrices(coords, distance, fuel_type, sort_by);
-  console.log("here");
-  xit("should accept a request with the correct format", function(){
-    expect(obj.getGasPrices).toHaveBeenCalledWith(coords, distance, fuel_type, sort_by);
+  var fakeUserInput = new UserInput({
+      starting_point: "northbrook, il",
+      destination: "chicago, il",
+      make: "ford",
+      model: "focus",
+      year: "2004"
+    });
+  beforeEach(function(){
+    spyOn(fakeUserInput, 'getGasPrices');
+    fakeUserInput.getGasPrices(coords, distance, fuel_type, sort_by);
   });
-  xit("should include stations in the return data", function(){
-    expect(JSON.parse(getGasPrices(coords, distance, fuel_type, sort_by).returnText).stations).toBeDefined();
+
+  it("should accept a request with the correct format", function(){
+    expect(fakeUserInput.getGasPrices).toHaveBeenCalledWith(coords, distance, fuel_type, sort_by);
   });
 });
 
