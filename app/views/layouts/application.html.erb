@@ -12,11 +12,13 @@
   </head>
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
-      <li class="name"><h1>Bespeckled Lampshade</h1></li>
+      <li class="name"><img src="assets/images/gasulator-04.svg" /><h1>Gasulator</h1></li>
     </ul>
   </nav>
   <body>
-    <%= yield %>
-    <%= javascript_include_tag "application" %>
+    <div class="row">
+      <%= yield %>
+      <%= javascript_include_tag "application" %>
+    </div>
   </body>
 </html>

@@ -15,3 +15,16 @@
  *= require foundation_and_overrides
 
  */
+ .top-bar {
+ 	padding-left: 10px;
+ }
+ .top-bar img {
+ 	height: 40px;
+ 	margin: 5px;
+ 	display: inline;
+ }
+
+ .top-bar h1 {
+ 	display: inline;
+ 	color: white;
+ }
