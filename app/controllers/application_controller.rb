@@ -1,8 +1,11 @@
+  # TODO: If A user fails to provide a response, it errors out. We need error handling or the ability to add all cars from 2003
+  # TODO: Use gas API
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
+  WORK_MONTH = 23
+  WORK_YEAR = 280
   def index
     @make = Car.order("make").select("make").distinct(true).pluck("make")
   end
@@ -25,5 +28,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def submit
+    p "*"*100
+    p params
+    distance = Google.calculate_distance(params[:starting_point], params[:destination])
+    car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
+    fuel_cost = car.fuel_cost({distance: distance, gas_price: params[:gas_price]})
+    name = car.name
+    return_value = {name: name ,distance: distance, monthly_cost: (fuel_cost*WORK_MONTH).round(2), yearly_cost: (fuel_cost*WORK_YEAR).round(2), city_mpg: car.city_mpg, hwy_mpg: car.highway_mpg }
+    if request.xhr?
+      render :json => return_value
+    end
+  end
 end

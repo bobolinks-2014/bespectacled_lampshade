@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
   get 'get_model' => 'application#get_model'
 
   get 'get_model_year' => 'application#get_model_year'
+
+  get 'submit' => 'application#submit'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
