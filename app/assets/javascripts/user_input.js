@@ -25,6 +25,8 @@ UserInput.prototype.getGasPrices = function(coords, distance, fuel_type, sort_by
 }
 
 UserInput.prototype.averageGasPrice = function(stations){
+  console.log("in here");
+  console.log(stations);
   var total = 0;
   var len = stations.length;
   $.each(stations, function(station){
