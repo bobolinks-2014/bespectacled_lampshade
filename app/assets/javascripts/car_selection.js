@@ -46,6 +46,12 @@ $('#user').submit(function(e){
   var userInput = new UserInput(options);
   var coords;
   userInput.getCoords(userInput.starting_point).done(function(data){
+    if (data.results === "ZERO_RESULTS") {
+      alert("Please enter a valid address.");
+      $(".starting_point").prop("disabled", false);
+      $(".destination").prop("disabled", false);
+    }
+    else {
     coords = data.results[0].geometry.location;
     userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
@@ -58,7 +64,8 @@ $('#user').submit(function(e){
         cardView.displayCard();
       });
     });
-  });
+    }
+  })
 });
 
 
