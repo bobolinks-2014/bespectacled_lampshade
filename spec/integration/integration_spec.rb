@@ -5,6 +5,7 @@ feature 'initial view' do
 
   before do 
     Car.create!(make: "Fisker", model: "Karma")
+    Car.create!(make: "Ferrari", model: "308", year: 1985)
   end
 
   context "on landing page" do
@@ -39,8 +40,12 @@ feature 'initial view' do
       expect(page).to have_select('model', options: ["Karma"])
     end
 
-    it "should see a drop down for model of vehicle disabled after make is selected" do
-      pending
+    it "should populate 'model year' dropdown with appropriate years after model is selected", :js => true do
+      visit root_path
+      select "Ferrari", from: 'make'
+      expect(page).to have_select('model', options: ["308"])
+      select "308", from: 'model'
+      expect(page).to have_select('year', options: [1985])
     end
 
     it "should see a drop down for year of vehicle enabled after model is selected" do
