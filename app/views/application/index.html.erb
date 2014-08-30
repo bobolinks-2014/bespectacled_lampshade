@@ -1,107 +1,18 @@
-<div class = "row">
+<h1> Sumzing coool </h1>
 <p> Enter Your Location Information </p>
-<%=form_tag(root_path, method: 'get') do%>
-<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point"%>
-<%= text_field_tag 'destination', nil, placeholder: "Destination"%>
+<%=form_tag(root_path, method: 'get', id: "user") do%>
+<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point", class: "starting_point"%>
+<%= text_field_tag 'destination', nil, placeholder: "Destination", class: "destination"%>
 
 <p> Enter Your Car Information </p>
-<%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
-<%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
-<%= select_tag "year", options_for_select([]),:prompt => "Year" %>
+  <%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
+  <%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
+  <%= select_tag "year", options_for_select([]),:prompt => "Year" %>
+<%=submit_tag "submit", class: "button car-info", style: "visibility:hidden" %>
 <% end %>
 </div>
 <hr>
-<div class="row card" style="border: 1px solid #ccc;">
-  <div class="large-3 columns ">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny alert">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
-  <div class="large-3 columns left">
-    <ul class="pricing-table">
-      <li class="title">2014 Honda Accord</li>
-      <li><img  src="http://media.caranddriver.com/images/media/51/dissected-lotus-based-infiniti-emerg-e-sports-car-concept-top-image-photo-451994-s-original.jpg" height="65" width="136" /></li>
-      <li class="description">23 MPG City / 38 MPG Hwy</li>
-      <li class="bullet-item">$150mo</li>
-      <li class="bullet-item">$1,800yr</li>
-      <li class="cta-button"><a href="#" class="button round tiny">X</a></li>
-    </ul>
-  </div>
+<div class="row cards" style="border: 1px solid #ccc;">
 </div>
 
 
