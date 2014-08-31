@@ -24,7 +24,7 @@ CardView.prototype.getEdmundsData = function(make, model, year) {
   edmundsRequest.done(function(data){
     carId = data["years"][0]["styles"][0]["id"];
     this.edmundsPriceToCard(carId, year);
-    this.edmundsPhotoToCard(carId); 
+    this.edmundsPhotoToCard(carId);
   }.bind(this));
 }
 
@@ -62,6 +62,8 @@ CardView.prototype.edmundsPhotoToCard = function(carId) {
     }
     img_html = '<img src="http://media.ed.edmunds-media.com' + photoList[0].photoSrcs[0] + '" />';
     $(".car_thumb:first").html(img_html);
+    $('.car_thumb').css({'overflow': 'hidden'})
+
   });
 }
 
