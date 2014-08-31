@@ -11,3 +11,10 @@ edmunds_secret: 6YHqf4jH3kZSdyehn2Ygtavg
 
 # https://api.edmunds.com/api/vehicle/v2/honda/accord?state=new&year=2014&view=basic&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn
 # https://api.edmunds.com/api/vehicle/v2/subaru/impreza?year=2014&view=basic&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn
+
+# photo list request
+# "https://api.edmunds.com/api/vehicle/v2/#{make}/#{model}?year=#{year}&view=basic&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn"
+# https://api.edmunds.com/v1/api/vehiclephoto/service/findphotosbystyleid?styleId=Honda_Accord&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn
+
+# estimated purchase price request
+# https://api.edmunds.com/v1/api/tmv/tmvservice/calculateusedtmv?styleid=101353967&condition=clean&mileage=20000&zip=46307&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn

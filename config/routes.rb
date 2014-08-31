@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get 'submit' => 'application#submit'
 
+  get 'public_transit' => 'application#public_transit'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
