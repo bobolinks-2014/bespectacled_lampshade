@@ -3,6 +3,7 @@
 // we want model to  be populated with the models associated with that newly selected make
 // this is an ajax call
 //then we render!
+$('input[type="submit"]').attr('disabled','disabled');
 
 $('#make').change(function(e) {
 
@@ -35,6 +36,8 @@ $('#model').change(function(e) {
 });
 $('#year').change(function(e) {
   $(".button.car-info").css("visibility", "visible");
+  $('input[type="submit"]').removeAttr('disabled');
+
 });
 
 // when the user submits the form, make a post request.
