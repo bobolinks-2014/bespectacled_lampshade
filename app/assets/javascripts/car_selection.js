@@ -21,7 +21,7 @@ $('#make').change(function(e) {
 });
 
 $('#model').change(function(e) {
-  
+
   var selected = $(this).find(":selected").text();
   var request = $.get('/get_model_year', {chosen_model: selected});
   $(".button.car-info").css("visibility", "hidden");
@@ -60,11 +60,13 @@ $('#user').submit(function(e){
     else {
       $(".starting_point").prop("disabled", true);
       $(".destination").prop("disabled", true);
-    coords = data.results[0].geometry.location;
-    userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
+
+      coords = data.results[0].geometry.location;
+      userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
       userInput.gas_price = userInput.averageGasPrice(data.stations);
       options["gas_price"] = userInput.gas_price;
+      options["steps"] = userInput.publicTransit(userInput.starting_point, userInput.destination);
       var DBrequest = $.get('/submit', options);
       DBrequest.done(function(data){
         $(".button.car-info").css("visibility", "hidden");

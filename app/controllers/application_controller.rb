@@ -10,6 +10,15 @@ class ApplicationController < ActionController::Base
     @make = Car.order("make").select("make").distinct(true).pluck("make")
   end
 
+  def public_transit
+    p "*"*100
+    p params
+    return_value =  params[:steps].nil? ? "Walking only" : Calculation.calculateMonthlyFare(params[:steps])
+    if request.xhr?
+      render :json => return_value
+    end
+  end
+
   def get_model
     # params = selected make
     # find all models associated with selected make
@@ -29,7 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def submit
-    p "*"*100
     p params
     distance = Google.calculate_distance(params[:starting_point], params[:destination])
     car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first

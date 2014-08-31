@@ -33,3 +33,34 @@ UserInput.prototype.averageGasPrice = function(stations){
   });
   return total/len;
 }
+
+UserInput.prototype.publicTransit = function(starting_point, destination){
+  var directionsService = new google.maps.DirectionsService();
+  var options = {
+    origin: starting_point,
+    destination: destination,
+    travelMode: google.maps.TravelMode.TRANSIT,
+    transitOptions: {
+      departureTime: new Date("October 13, 2014 11:13:00")
+    },
+    unitSystem: google.maps.UnitSystem.IMPERIAL
+  }
+
+  directionsService.route(options, function(response, status){
+    $('#directions').empty().append('<p> Public Transit Directions </p>');
+    $('#fareCost').empty();
+    steps = [];
+    $.each(response.routes[0].legs[0].steps, function(step){
+      if (this.travel_mode === 'TRANSIT'){
+        steps.push(this.instructions.split(" ")[0]);
+      }
+      console.log(this.instructions);
+      $('#directions').append('<li>'+this.instructions+'</li>')
+    });
+    return steps;
+    // var publicTransitRequest = $.get('/public_transit', {steps: steps});
+    // publicTransitRequest.done(function(returnVal){
+    //   $("#fareCost").append('<p>Monthly Cost $'+returnVal+'</p>')
+    // });
+  });
+}
