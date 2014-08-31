@@ -21,7 +21,7 @@ $('#make').change(function(e) {
 });
 
 $('#model').change(function(e) {
-  
+
   var selected = $(this).find(":selected").text();
   var request = $.get('/get_model_year', {chosen_model: selected});
   $(".button.car-info").css("visibility", "hidden");
@@ -42,8 +42,8 @@ $('#year').change(function(e) {
 $('#user').submit(function(e){
   e.preventDefault();
   var options = {
-    starting_point: $('#starting_point').val(),
-    destination: $('#destination').val(),
+    starting_point: document.getElementById('autocomplete').value,
+    destination: document.getElementById('autocomplete_destination').value,
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()

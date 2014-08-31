@@ -1,16 +1,18 @@
 <h1> Sumzing coool </h1>
 <p> Enter Your Location Information </p>
-<%=form_tag(root_path, method: 'get', id: "user") do%>
-<%= text_field_tag 'starting_point', nil , placeholder: "Starting Point", class: "starting_point"%>
-<%= text_field_tag 'destination', nil, placeholder: "Destination", class: "destination"%>
+    <%=form_tag(root_path, method: 'get', id: "user") do%>
 
-<p> Enter Your Car Information </p>
-  <%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
-  <%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
-  <%= select_tag "year", options_for_select([]),:prompt => "Year" %>
-<%=submit_tag "submit", class: "button car-info", style: "visibility:hidden" %>
-<% end %>
-</div>
+    <%= text_field_tag 'starting_point', nil , placeholder: "Starting Point", class: "starting_point", id:"autocomplete", onFocus: "geolocate"%>
+
+    <%= text_field_tag 'destination', nil, placeholder: "Destination", class: "destination", onFocus: "geolocate", id:"autocomplete_destination"%>
+
+    <p> Enter Your Car Information </p>
+      <%= select_tag "make", options_for_select(@make),:prompt => "Make"%>
+      <%= select_tag "model", options_for_select([]) ,:prompt => "Model"%>
+      <%= select_tag "year", options_for_select([]),:prompt => "Year" %>
+    <%=submit_tag "submit", class: "button car-info", style: "visibility:hidden" %>
+    <% end %>
+
 <hr>
 <div class="row cards" style="border: 1px solid #ccc;">
 </div>

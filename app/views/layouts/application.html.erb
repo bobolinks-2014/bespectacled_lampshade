@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
 
     <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
@@ -15,6 +17,13 @@
       <li class="name"><h1>Bespeckled Lampshade</h1></li>
     </ul>
   </nav>
+  <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
   <body>
     <%= yield %>
     <%= javascript_include_tag "application" %>
