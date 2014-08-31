@@ -50,23 +50,33 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
     },
     unitSystem: google.maps.UnitSystem.IMPERIAL
   }
-  var steps = [];
+
   directionsService.route(options, function(response, status){
-    $('#directions>ol').empty().append('<h2> Public Transit Directions </h2>');
-    $('#fareCost').empty();
+    this.renderDirections(response, starting_point, destination);
+  }.bind(this));
+}
 
-    $.each(response.routes[0].legs[0].steps, function(step){
-      if (this.travel_mode === 'TRANSIT'){
-        steps.push(this.instructions.split(" ")[0]);
-      }
-      console.log(this.instructions);
-          $('#directions>ol').append('<li>'+ this.instructions+'</li>');
+UserInput.prototype.renderDirections = function(response, starting_point, destination){
+  $('#directions').empty();
+  $('#fareCost').empty();
+  var steps = [];
+  $.each(response.routes[0].legs[0].steps, function(step){
+    if (this.travel_mode === 'TRANSIT'){
+      steps.push(this.instructions.split(" ")[0]);
+    }
+    // console.log(this.instructions);
+    // $('#directions>ol').append('<li>'+ this.instructions+'</li>');
+  });
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setPanel(document.getElementById('directions'));
+  directionsDisplay.setDirections(response);
+  this.getFareCost(steps, starting_point, destination);
+}
 
-    });
-    // directionsDisplay.setPanel(document.getElementById('directions'));
-    var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
-    publicTransitRequest.done(function(data){
-        $("#fareCost").append('<p>Monthly Cost $'+data+'</p><p>Yearly Cost $'+data*12+'</p>')
-    });
+
+UserInput.prototype.getFareCost = function(steps, starting_point, destination){
+  var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
+  publicTransitRequest.done(function(data){
+      $("#fareCost").append('<h3> Fare Cost </h3><p class = "panel callout">This feature is in beta and only applies to the Chicagoland area. All costs are approximate and based on monthly fares.</p><h6>Monthly Cost</h6><p>$'+data+'</p><h6>Yearly Cost</h6><p>$'+data*12+'</p>')
   });
 }
