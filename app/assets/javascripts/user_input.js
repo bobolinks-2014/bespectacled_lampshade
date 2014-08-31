@@ -5,6 +5,7 @@ function UserInput(options){
     this.model= options.model;
     this.year= options.year;
     this.gas_price;
+    this.steps;
 }
 
 UserInput.prototype.getCoords = function(starting_point){
@@ -36,4 +37,34 @@ UserInput.prototype.averageGasPrice = function(stations){
     }
   });
   return total/len;
+}
+
+UserInput.prototype.publicTransit = function(starting_point, destination){
+  var directionsService = new google.maps.DirectionsService();
+  var options = {
+    origin: starting_point,
+    destination: destination,
+    travelMode: google.maps.TravelMode.TRANSIT,
+    transitOptions: {
+      departureTime: new Date("October 13, 2014 11:13:00")
+    },
+    unitSystem: google.maps.UnitSystem.IMPERIAL
+  }
+  var steps = [];
+  directionsService.route(options, function(response, status){
+    $('#directions>ol').empty().append('<h2> Public Transit Directions </h2>');
+    $('#fareCost').empty();
+
+    $.each(response.routes[0].legs[0].steps, function(step){
+      if (this.travel_mode === 'TRANSIT'){
+        steps.push(this.instructions.split(" ")[0]);
+      }
+      console.log(this.instructions);
+    });
+    directionsDisplay.setPanel(document.getElementById('directions'));
+    var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
+    publicTransitRequest.done(function(data){
+        $("#fareCost").append('<p>Monthly Cost $'+data+'</p><p>Yearly Cost $'+data*12+'</p>')
+    });
+  });
 }

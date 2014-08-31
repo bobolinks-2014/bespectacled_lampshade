@@ -13,17 +13,4 @@ function GoogleDirections(options){
   this.region = options.region // String
 }
 
-var directionsService = new google.maps.DirectionsService();
-var request = {
-  origin: "northbrook, il",
-  destination: "field museum, chicago, il",
-  travelMode: google.maps.TravelMode.TRANSIT,
-  transitOptions: {
-    departureTime: new Date(1337675679473)
-  },
-  unitSystem: google.maps.UnitSystem.IMPERIAL
-}
 
-directionsService.route(request, function(response, status){
-  console.log(response);
-});
