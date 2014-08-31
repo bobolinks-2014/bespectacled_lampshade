@@ -25,15 +25,22 @@ CardView.prototype.getEdmundsPhoto = function(make, model, year) {
     	console.log(data);
     	car_id = data["years"][0]["styles"][0]["id"];
     	photo_list_url = "https://api.edmunds.com/v1/api/vehiclephoto/service/findphotosbystyleid?styleId=" + car_id + "&fmt=json&api_key=xcs69p6sfvqx4dg3tupjg8hn";
+    	console.log(photo_list_url);
     	edmundsPhotoRequest = $.get(photo_list_url);
     	edmundsPhotoRequest.done(function(list) {
-	    	photoList = list.filter(function(x){
-	    		if (x.shotTypeAbbreviation == "S") return x; 
-	    	});
+    		photoTypes = ["S", "F", "FQ", "RQ", "R", "O", "PROFILE", "D", "I"]
+    		for( i=0; i < photoTypes.length; i++) {
+		    	photoList = list.filter(function(x){
+		    		if (x.shotTypeAbbreviation == photoTypes[i]) {return x; }
+		    	});
+		    	if(typeof photoList[0] !== 'undefined') { 
+		    		if(typeof photoList[0].photoSrcs !== 'undefined') { break }
+		    	}
+	    	}
 	    	img_html = '<img src="http://media.ed.edmunds-media.com' + photoList[0].photoSrcs[0] + '" />';
 	    	console.log(img_html);
    		 	$(".car_thumb:first").html(img_html);
-   		 });
+   		});
     });
 	
 }
