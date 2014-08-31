@@ -28,7 +28,12 @@ UserInput.prototype.averageGasPrice = function(stations){
   var total = 0;
   var len = stations.length;
   $.each(stations, function(station){
-    total += parseFloat(this.reg_price);
+    if (this.reg_price !== "N/A"){
+      total += parseFloat(this.reg_price);
+    }
+    else{
+      len -= 1;
+    }
   });
   return total/len;
 }

@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 
     <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <link href='http://fonts.googleapis.com/css?family=Anton|Raleway' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -14,9 +15,17 @@
   </style>
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
-      <li class="name"><h1>Bespeckled Lampshade</h1></li>
+      <li class="name"><img src="assets/images/gasulator-04.svg" /><h1>Gasulator</h1></li>
     </ul>
+
   </nav>
+  <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
   <body>
 
     <%= yield %>

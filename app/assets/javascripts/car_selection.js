@@ -42,8 +42,8 @@ $('#year').change(function(e) {
 $('#user').submit(function(e){
   e.preventDefault();
   var options = {
-    starting_point: $('#starting_point').val(),
-    destination: $('#destination').val(),
+    starting_point: document.getElementById('autocomplete').value,
+    destination: document.getElementById('autocomplete_destination').value,
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
@@ -76,4 +76,3 @@ $('#user').submit(function(e){
     }
   })
 });
-
