@@ -42,8 +42,8 @@ $('#year').change(function(e) {
 $('#user').submit(function(e){
   e.preventDefault();
   var options = {
-    starting_point: $('#starting_point').val(),
-    destination: $('#destination').val(),
+    starting_point: document.getElementById('autocomplete').value,
+    destination: document.getElementById('autocomplete_destination').value,
     make: $('#make').find(":selected").text(),
     model: $('#model').find(":selected").text(),
     year: $('#year').find(":selected").text()
@@ -80,35 +80,3 @@ $('#user').submit(function(e){
     }
   })
 });
-
-
-// function getCoords(starting_point){
-//   parsed_starting_point = parseAddress(starting_point);
-//   console.log(parsed_starting_point);
-//   var request = $.get("https://maps.googleapis.com/maps/api/geocode/json?address="+parsed_starting_point+"&key=AIzaSyAVkmq_gu_UwQiR7znb8Bf0_mktYaEDt0E"
-// )
-//   return request;
-// }
-
-// function parseAddress(address){
-//   return address.replace(" ", "+")
-// }
-
-// function getGasPrices(coords, distance, fuel_type, sort_by){
-//     var request = $.get('http://devapi.mygasfeed.com/stations/radius/'+coords.latitude+'/'+coords.longitude+'/'+distance+'/'+fuel_type+'/'+sort_by+'/rfej9napna.json');
-//     return request;
-// }
-
-// function averageGasPrice(stations){
-//   var total = 0;
-//   var len = stations.length;
-//   $.each(stations, function(station){
-//     total += parseFloat(this.reg_price);
-//   });
-//   return total/len;
-// }
-
-// var APIrequest = $.get('http://devapi.mygasfeed.com/stations/radius/42.1292/-87.8408/2/reg/Price/rfej9napna.json');
-// APIrequest.done(function(data){
-//   console.log(data);
-// });
