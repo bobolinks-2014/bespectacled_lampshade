@@ -1,10 +1,9 @@
-// TODO: make this a describe for the user input model
-
 describe ("UserInput class", function(){
   var coords = {latitude: '42.1292', longitude: '-87.8408'};
   var distance = "2";
   var fuel_type = "reg";
   var sort_by = "Price";
+
   var fakeUserInput = new UserInput({
       starting_point: "northbrook, il",
       destination: "chicago, il",
