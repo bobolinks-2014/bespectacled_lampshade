@@ -5,6 +5,7 @@ function UserInput(options){
     this.model= options.model;
     this.year= options.year;
     this.gas_price;
+    this.steps;
 }
 
 UserInput.prototype.getCoords = function(starting_point){
@@ -45,11 +46,11 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
     },
     unitSystem: google.maps.UnitSystem.IMPERIAL
   }
-
+  var steps = [];
   directionsService.route(options, function(response, status){
     $('#directions').empty().append('<p> Public Transit Directions </p>');
     $('#fareCost').empty();
-    steps = [];
+
     $.each(response.routes[0].legs[0].steps, function(step){
       if (this.travel_mode === 'TRANSIT'){
         steps.push(this.instructions.split(" ")[0]);
@@ -57,10 +58,9 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
       console.log(this.instructions);
       $('#directions').append('<li>'+this.instructions+'</li>')
     });
-    return steps;
-    // var publicTransitRequest = $.get('/public_transit', {steps: steps});
-    // publicTransitRequest.done(function(returnVal){
-    //   $("#fareCost").append('<p>Monthly Cost $'+returnVal+'</p>')
-    // });
+    var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
+    publicTransitRequest.done(function(data){
+        $("#fareCost").append('<p>Monthly Cost $'+data+'</p>')
+    });
   });
 }

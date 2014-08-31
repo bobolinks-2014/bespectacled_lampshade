@@ -64,9 +64,10 @@ $('#user').submit(function(e){
       coords = data.results[0].geometry.location;
       userInput.getGasPrices({latitude: coords.lat, longitude: coords.lng}, '2', 'reg', 'Price').done(function(json){
       data = JSON.parse(json);
+      userInput.publicTransit(userInput.starting_point, userInput.destination);
       userInput.gas_price = userInput.averageGasPrice(data.stations);
       options["gas_price"] = userInput.gas_price;
-      options["steps"] = userInput.publicTransit(userInput.starting_point, userInput.destination);
+
       var DBrequest = $.get('/submit', options);
       DBrequest.done(function(data){
         $(".button.car-info").css("visibility", "hidden");
@@ -74,6 +75,7 @@ $('#user').submit(function(e){
         cardView = new CardView(card)
         cardView.displayCard();
       });
+
     });
     }
   })

@@ -4,11 +4,11 @@ class Calculation
     miles = ( kilometers * 0.621371 ).round(2)
   end
 
-  def self.calculateMonthlyFare(steps)
+  def self.calculateMonthlyFare(steps, distance)
     total = 0
+    p distance
     if steps.include?("Train")
-      zone = self.findZone
-      total += self.trainFare(zone);
+      total += self.trainFare(distance);
     end
     if steps.include?("Subway" || "Bus")
       total += 100
@@ -16,26 +16,24 @@ class Calculation
     total
   end
 
-  def self.findZone
-    'E'
-  end
 
-  def self.trainFare(zone)
-    case zone
-    when 'A'
+  def self.trainFare(distance)
+    if distance < 5
       78
-    when "B"
+    elsif distance < 10
       85
-    when "C"
+    elsif distance < 15
       121
-    when 'D'
+    elsif distance < 20
       135
-    when 'E'
+    elsif distance < 25
       149.50
-    when 'F'
+    elsif distance < 30
       165
-    else
+    elsif distance <  35
       200
+    else
+      0
     end
   end
 end

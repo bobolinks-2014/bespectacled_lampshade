@@ -11,12 +11,12 @@ class ApplicationController < ActionController::Base
   end
 
   def public_transit
-    p "*"*100
-    p params
-    return_value =  params[:steps].nil? ? "Walking only" : Calculation.calculateMonthlyFare(params[:steps])
+    distance = Google.calculate_distance(params[:starting_point], params[:destination])
+    return_value = params[:steps].nil? ? "Walking only" : Calculation.calculateMonthlyFare(params[:steps], distance)
     if request.xhr?
       render :json => return_value
     end
+
   end
 
   def get_model
@@ -43,6 +43,7 @@ class ApplicationController < ActionController::Base
     car = Car.where(make: params[:make], model: params[:model], year: params[:year]).first
     fuel_cost = car.fuel_cost({distance: distance, gas_price: params[:gas_price]})
     name = car.name
+    # fare = public_transit(params[:steps], distance)
     return_value = {name: name ,distance: distance, monthly_cost: (fuel_cost*WORK_MONTH).round(2), yearly_cost: (fuel_cost*WORK_YEAR).round(2), city_mpg: car.city_mpg, hwy_mpg: car.highway_mpg }
     if request.xhr?
       render :json => return_value
