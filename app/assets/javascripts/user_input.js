@@ -48,7 +48,7 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
   }
   var steps = [];
   directionsService.route(options, function(response, status){
-    $('#directions').empty().append('<p> Public Transit Directions </p>');
+    $('#directions>ol').empty().append('<h2> Public Transit Directions </h2>');
     $('#fareCost').empty();
 
     $.each(response.routes[0].legs[0].steps, function(step){
@@ -56,11 +56,11 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
         steps.push(this.instructions.split(" ")[0]);
       }
       console.log(this.instructions);
-      $('#directions').append('<li>'+this.instructions+'</li>')
+      $('#directions>ol').append('<li>'+this.instructions+'</li>')
     });
     var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
     publicTransitRequest.done(function(data){
-        $("#fareCost").append('<p>Monthly Cost $'+data+'</p>')
+        $("#fareCost").append('<p>Monthly Cost $'+data+'</p><p>Yearly Cost $'+data*12+'</p>')
     });
   });
 }

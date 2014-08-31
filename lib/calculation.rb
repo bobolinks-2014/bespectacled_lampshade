@@ -19,21 +19,29 @@ class Calculation
 
   def self.trainFare(distance)
     if distance < 5
-      78
+      78.25
     elsif distance < 10
-      85
+      85.50
     elsif distance < 15
-      121
+      121.00
     elsif distance < 20
-      135
+      135.25
     elsif distance < 25
       149.50
     elsif distance < 30
-      165
+      163.75
     elsif distance <  35
-      200
+      178.00
+    elsif distance < 40
+      192.25
+    elsif distance < 45
+      206.50
+    elsif distance < 50
+      220.75
+    elsif distance < 55
+      235.00
     else
-      0
+      263.50
     end
   end
 end
