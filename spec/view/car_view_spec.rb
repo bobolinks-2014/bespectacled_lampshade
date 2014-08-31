@@ -1,4 +1,4 @@
-require '../spec_helper'
+require 'spec_helper'
 
 feature 'initial view' do
   context "on landing page" do

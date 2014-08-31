@@ -31,7 +31,7 @@ group :development, :test do
 	gem 'jasmine-rails'
 	gem 'launchy'
 	gem 'selenium-webdriver'
-	# gem 'capybara-webkit'
+	gem 'capybara-webkit', '>=1.3.0'
 end
 
 group :production do
