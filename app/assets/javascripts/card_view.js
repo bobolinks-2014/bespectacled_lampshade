@@ -2,6 +2,7 @@ function CardView(model){
   this.model = model;
   this.$el = $("<div></div>");
   this.$el.on("click", ".button", this.deleteCard);
+  this.$el.on("click", this.drag.bind(this));
 }
 CardView.prototype.render = function(){
   this.$el.html('<div class="large-3 columns "><ul class="pricing-table"><li class="title">'+this.model.name+'</li><li class="car_thumb text-center"> </li><li class="description">'+this.model.city_mpg +'MPG City /'+this.model.hwy_mpg+'MPG Hwy</li><li class="bullet-item">$'+this.model.monthly_cost+'mo</li><li class="bullet-item">$'+this.model.yearly_cost+'yr</li><li class="cta-button"><a href="#" class="button round tiny">X</a></li></ul></div>');
@@ -33,7 +34,7 @@ CardView.prototype.getEdmundsPhoto = function(make, model, year) {
 		    	photoList = list.filter(function(x){
 		    		if (x.shotTypeAbbreviation == photoTypes[i]) {return x; }
 		    	});
-		    	if(typeof photoList[0] !== 'undefined') { 
+		    	if(typeof photoList[0] !== 'undefined') {
 		    		if(typeof photoList[0].photoSrcs !== 'undefined') { break }
 		    	}
 	    	}
@@ -42,7 +43,7 @@ CardView.prototype.getEdmundsPhoto = function(make, model, year) {
    		 	$(".car_thumb:first").html(img_html);
    		});
     });
-	
+
 }
 
 CardView.prototype.displayCard = function(){
@@ -53,3 +54,8 @@ CardView.prototype.deleteCard = function(event){
   event.preventDefault();
   $(this).parent().parent().parent().empty();
 }
+CardView.prototype.drag = function(event){
+  this.$el.draggable();
+}
+
+
