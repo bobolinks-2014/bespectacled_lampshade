@@ -60,8 +60,10 @@ UserInput.prototype.publicTransit = function(starting_point, destination){
         steps.push(this.instructions.split(" ")[0]);
       }
       console.log(this.instructions);
+          $('#directions>ol').append('<li>'+ this.instructions+'</li>');
+
     });
-    directionsDisplay.setPanel(document.getElementById('directions'));
+    // directionsDisplay.setPanel(document.getElementById('directions'));
     var publicTransitRequest = $.get('/public_transit', {steps: steps, starting_point: starting_point, destination: destination});
     publicTransitRequest.done(function(data){
         $("#fareCost").append('<p>Monthly Cost $'+data+'</p><p>Yearly Cost $'+data*12+'</p>')
