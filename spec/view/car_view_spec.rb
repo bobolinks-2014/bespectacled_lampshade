@@ -1,21 +1,28 @@
-require 'spec_helper'
+require '../spec_helper'
 
 feature 'initial view' do
   context "on landing page" do
     it "should see a text field for home address input" do
-      pending
+      visit root_path
+      expect(page).to have_css('input[type="text"][name="starting_point"]')
     end
+
     it "should see a text field for destination address input" do
-      pending
+      visit root_path
+      expect(page).to have_css('input[type="text"][name="destination"]')
     end
+
     it "should see a drop down for make of vehicle" do
-      pending
+      visit root_path
+      expect(page).to have_css('select[name="make"]')
     end
     it "should see a drop down for model of vehicle disabled" do
-      pending
+      visit root_path
+      expect(page).to have_css('select[name="model"]')
     end
     it "should see a drop down for year of vehicle disabled" do
-      pending
+      visit root_path
+      expect(page).to have_css('select[name="year"]')
     end
     it "should see a drop down for year of vehicle enabled after make is selected" do
       pending
