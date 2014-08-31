@@ -107,6 +107,17 @@ function averageGasPrice(stations){
   return total/len;
 }
 
+
+var $loading = $('#loadingDiv').hide();
+$(document)
+  .ajaxStart(function(){
+    $loading.show();
+  })
+  .ajaxStop(function(){
+    $loading.hide();
+  })
+
+
 // var APIrequest = $.get('http://devapi.mygasfeed.com/stations/radius/42.1292/-87.8408/2/reg/Price/rfej9napna.json');
 // APIrequest.done(function(data){
 //   console.log(data);
