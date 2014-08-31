@@ -23,9 +23,7 @@ gem 'foundation-rails'
 
 # For integration testing
 
-gem 'launchy'
-gem 'selenium-webdriver'
-gem 'capybara-webkit'
+
 
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -44,6 +42,9 @@ group :development, :test do
   gem 'capybara', '~> 2.2.1'
   gem 'database_cleaner', '~> 1.2.0'
   gem 'jasmine-rails'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  # gem 'capybara-webkit'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
